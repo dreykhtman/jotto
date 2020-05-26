@@ -8,6 +8,7 @@
     "react/jsx-fragments": "off",
     "react/state-in-constructor": "off",
     "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
     "jsx-a11y/label-has-associated-control": "off"
   },
   "env": { "browser": true, "jest/globals": true }
