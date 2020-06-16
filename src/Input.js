@@ -1,9 +1,27 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { guessWord } from './actions';
 
 export class UnconnectedInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentGuess: null,
+    };
+    this.submitGuessedWord = this.submitGuessedWord.bind(this);
+  }
+
+  submitGuessedWord(e) {
+    e.preventDefault();
+    const guessedWord = this.state.currentGuess;
+    if (guessWord && guessWord.length > 0) {
+      this.props.guessWord(guessedWord);
+    }
+  }
+
   render() {
     const contents = this.props.success ? null : (
       <form className="form-inline">
@@ -12,12 +30,13 @@ export class UnconnectedInput extends Component {
           type="text"
           className="mb-2 mx-sm-3"
           placeholder="Enter guess"
+          onChange={(e) => this.setState({ currentGuess: e.target.value })}
         />
         <button
           data-test="submit-button"
           className="submit-button"
           type="submit"
-          onClick={() => this.props.guessWord('train')}
+          onClick={this.submitGuessedWord}
         >
           Submit
         </button>
