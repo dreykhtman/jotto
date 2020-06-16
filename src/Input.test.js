@@ -2,8 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../test/testUtils';
-// eslint-disable-next-line import/no-named-as-default
-import Input from './Input';
+import Input, { UnconnectedInput } from './Input';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
@@ -71,5 +70,20 @@ describe('redux props', () => {
     const wrapper = setup();
     const guessWordProp = wrapper.instance().props.guessWord;
     expect(guessWordProp).toBeInstanceOf(Function);
+  });
+});
+
+describe('`guessWord` action creator call', () => {
+  test('should call `guessWord` on button click', () => {
+    const guessWordMock = jest.fn();
+    const props = {
+      guessWord: guessWordMock,
+    };
+    const wrapper = shallow(<UnconnectedInput {...props} />);
+    const button = findByTestAttr(wrapper, 'submit-button');
+
+    button.simulate('click');
+    const guessWordCallCount = guessWordMock.mock.calls.length;
+    expect(guessWordCallCount).toBe(1);
   });
 });
