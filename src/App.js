@@ -22,6 +22,7 @@ export class UnconnectedApp extends Component {
         <Congrats success={this.props.success} />
         <Input />
         <GuessedWords guessedWords={this.props.guessedWords} />
+        {/* {console.log(this.props.secretWord)} */}
       </div>
     );
   }
