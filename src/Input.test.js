@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../test/testUtils';
+// eslint-disable-next-line import/no-named-as-default
 import Input from './Input';
 
 const setup = (initialState = {}) => {
